@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # 3. feladat 2. rész(modositas)feladat
+=======
+# 3. feladat 2. rész(modositas)feladat
+>>>>>>> branch-B
 _ez egy aláhúzott komment_.
 *ez pedig egy vastag betűs komment*.
 

@@ -1,4 +1,4 @@
-# 3. feladat 2. részfeladat
+# 3. feladat 2. rész(modositas)feladat
 _ez egy aláhúzott komment_.
 *ez pedig egy vastag betűs komment*.
 

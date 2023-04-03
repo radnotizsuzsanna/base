@@ -4,11 +4,15 @@ import hu.bme.mit.train.interfaces.TrainController;
 import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
 
+import java.time.LocalDateTime;    
+
 public class TrainSensorImpl implements TrainSensor {
 
 	private TrainController controller;
 	private TrainUser user;
 	private int speedLimit = 5;
+
+	Table<Time, Integer, Integer> tachograf = HashBasedTable.create();
 
 	public TrainSensorImpl(TrainController controller, TrainUser user) {
 		this.controller = controller;
@@ -24,6 +28,17 @@ public class TrainSensorImpl implements TrainSensor {
 	public void overrideSpeedLimit(int speedLimit) {
 		this.speedLimit = speedLimit;
 		controller.setSpeedLimit(speedLimit);
+	}
+
+	@Override
+	public void record(){
+		table.put(LocalDateTime.now(), user.getJoystickPosition(), controller.getReferenceSpeed());
+	}
+
+
+	@Override
+	public Integer getTachografValue(LocalDateTime time, Integer joystickPosition ){
+		return tachograf.get(time, joystickPosition);
 	}
 
 }

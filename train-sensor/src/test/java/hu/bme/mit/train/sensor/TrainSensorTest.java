@@ -7,13 +7,26 @@ import static org.mockito.Mockito.*;
 
 public class TrainSensorTest {
 
+	TrainController controller;
+	TrainSensor sensor;
+	TrainUser user;
+
     @Before
     public void before() {
-        // TODO Add initializations
-    }
+        TrainSystem system = new TrainSystem();
+		controller = system.getController();
+		sensor = system.getSensor();
+		user = system.getUser();
+
+		sensor.overrideSpeedLimit(50);
+	}
 
     @Test
-    public void ThisIsAnExampleTestStub() {
-        // TODO Delete this and add test cases based on the issues
+    public void testRecording() {
+        user.overrideJoystickPosition(0);
+        LocalDateTime time = LocalDateTime.now();
+        sensor.record();
+
+        Assert.assertEquals(0, sensor.getTachografValue(time, 0));
     }
 }

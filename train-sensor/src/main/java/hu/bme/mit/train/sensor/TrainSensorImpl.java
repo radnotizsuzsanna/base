@@ -7,6 +7,7 @@ import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TrainSensorImpl implements TrainSensor {
 
@@ -14,7 +15,7 @@ public class TrainSensorImpl implements TrainSensor {
 	private TrainUser user;
 	private int speedLimit = 5;
 
-	Table<LocalDateTime, Integer, Integer> tachograf = HashBasedTable.create();
+	Table<String, Integer, Integer> tachograf = HashBasedTable.create();
 
 
 	public TrainSensorImpl(TrainController controller, TrainUser user) {
@@ -35,12 +36,12 @@ public class TrainSensorImpl implements TrainSensor {
 
 	@Override
 	public void record() {
-		tachograf.put(LocalDateTime.now(), user.getJoystickPosition(), controller.getReferenceSpeed());
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		tachograf.put(dtf.format(LocalDateTime.now()), user.getJoystickPosition(), controller.getReferenceSpeed());
 	}
 
 	@Override
-	public Integer getTachograf(LocalDateTime time, Integer joystickPosition) {
+	public Integer getTachograf(String time, Integer joystickPosition) {
 		return tachograf.get(time, joystickPosition);
 	}
-
 }

@@ -7,7 +7,9 @@ import org.junit.Test;
 import hu.bme.mit.train.interfaces.TrainController;
 import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
-import hu.bme.mit.train.system.TrainSystem;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TrainSystemTest {
 
@@ -50,5 +52,14 @@ public class TrainSystemTest {
 		Assert.assertEquals(0, controller.getReferenceSpeed());
 	}
 
+	@Test
+	public void testRecording() {
+        user.overrideJoystickPosition(0);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		String time = dtf.format(LocalDateTime.now());;
+        sensor.record();
+        Integer value = sensor.getTachograf(time, 0);
+        Assert.assertEquals((Integer) 0, value);
+	}
 	
 }

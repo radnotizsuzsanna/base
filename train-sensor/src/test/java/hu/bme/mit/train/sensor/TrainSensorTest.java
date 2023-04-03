@@ -16,21 +16,11 @@ public class TrainSensorTest {
     TrainUser user;
     @Before
     public void before() {
-        //Nem tudtam megírni a teszteket, mert ilyen hibát kaptam:
-        //Adding dependency on module 'hu.bme.mit.train.system' will introduce circular dependency between modules 'hu.bme.mit.train.sensor' and 'hu.bme.mit.train.system'.
-
-        /*TrainSystem system = new TrainSystem();
-        controller = system.getController();
-        sensor = system.getSensor();
-        user = system.getUser();*/
+        //A tesztek a TrainSystemTest.java-ban vannak
     }
 
     @Test
     public void ThisIsAnExampleTestStub() {
-       /* user.overrideJoystickPosition(0);
-        LocalDateTime time = LocalDateTime.now();
-        sensor.record();
-        Integer value = sensor.getTachograf(time, 0);
-        Assert.assertEquals((Integer) 0, value);*/
+        //A tesztek a TrainSystemTest.java-ban vannak
     }
 }

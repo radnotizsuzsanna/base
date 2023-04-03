@@ -11,6 +11,6 @@ public interface TrainSensor {
 
 	void record();
 
-	Integer getRefSpegetTachografValueed(LocalDateTime time);
+	Integer getTachografValue(LocalDateTime time, Integer joystickPosition );
 
 }

@@ -1,5 +1,7 @@
 package hu.bme.mit.train.sensor;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 import hu.bme.mit.train.interfaces.TrainController;
 import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
@@ -12,7 +14,7 @@ public class TrainSensorImpl implements TrainSensor {
 	private TrainUser user;
 	private int speedLimit = 5;
 
-	Table<Time, Integer, Integer> tachograf = HashBasedTable.create();
+	Table<LocalDateTime, Integer, Integer> tachograf = HashBasedTable.create();
 
 	public TrainSensorImpl(TrainController controller, TrainUser user) {
 		this.controller = controller;
@@ -32,7 +34,7 @@ public class TrainSensorImpl implements TrainSensor {
 
 	@Override
 	public void record(){
-		table.put(LocalDateTime.now(), user.getJoystickPosition(), controller.getReferenceSpeed());
+		tachograf.put(LocalDateTime.now(), user.getJoystickPosition(), controller.getReferenceSpeed());
 	}
 
 

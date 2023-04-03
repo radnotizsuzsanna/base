@@ -1,11 +1,14 @@
 package hu.bme.mit.train.sensor;
 
+import hu.bme.mit.train.interfaces.TrainController;
+import hu.bme.mit.train.interfaces.TrainSensor;
+import hu.bme.mit.train.interfaces.TrainUser;
+import hu.bme.mit.train.system.TrainSystem;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 
-import java.time.LocalDateTime;    
+import java.time.LocalDateTime;
 
 public class TrainSensorTest {
 
@@ -28,7 +31,7 @@ public class TrainSensorTest {
         user.overrideJoystickPosition(0);
         LocalDateTime time = LocalDateTime.now();
         sensor.record();
-
-        Assert.assertEquals(0, sensor.getTachografValue(time, 0));
+        Integer value = sensor.getTachografValue(time, 0);
+        Assert.assertEquals((Integer) 0, value);
     }
 }
